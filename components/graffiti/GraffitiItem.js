@@ -1,4 +1,3 @@
-import styles from './GraffitiItem.module.css'
 import {
   Grid,
   Card,
@@ -6,13 +5,13 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Button,
 } from '@mui/material'
+import styles from './GraffitiItem.module.css'
 
-function MeetupItem(props) {
+const GraffitiItem = (props) => {
   return (
     <Grid item xs={12} md={6}>
-      <Card>
+      <Card sx={{ m: 1 }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -32,4 +31,4 @@ function MeetupItem(props) {
   )
 }
 
-export default MeetupItem
+export default GraffitiItem
