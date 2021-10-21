@@ -4,6 +4,7 @@ import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 import { Container } from '@mui/material'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 
 export default function Home() {
   const mockData = [
@@ -49,6 +50,7 @@ export default function Home() {
         />
         <GraffitiList items={mockData} />
       </Container>
+      <Footer />
     </>
   )
 }

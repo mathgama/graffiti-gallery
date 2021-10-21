@@ -1,0 +1,12 @@
+.footerText {
+  text-align: center;
+}
+
+.socialIcon {
+  font-size: 28px;
+  color: #555;
+}
+
+.socialIcon:hover {
+  color: #ccc;
+}
