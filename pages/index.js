@@ -42,7 +42,7 @@ export default function Home() {
       <Header />
       <Container>
         <FeaturedGraffiti
-          image="https://www.streetartbio.com/wp-content/uploads/2020/03/Banksy_Balloon_Girl_London.jpg"
+          image="/Banksy_Balloon_Girl_London.jpg"
           alt="Featured"
           city="New York"
           uploadUser="mathgama"

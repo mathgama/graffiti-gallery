@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Card,
   CardActionArea,
@@ -5,15 +6,26 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
+import ImageDialog from '../util/ImageDialog'
 import styles from './FeaturedGraffiti.module.css'
 
 const FeaturedGraffiti = (props) => {
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+
+  const openDialogHandler = () => {
+    setIsDialogOpen(true)
+  }
+
+  const closeDialogHandler = () => {
+    setIsDialogOpen(false)
+  }
+
   return (
     <div>
       <Typography variant="h4" sx={{ my: 2 }}>
         Featured
       </Typography>
-      <Card>
+      <Card onClick={openDialogHandler}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -29,6 +41,13 @@ const FeaturedGraffiti = (props) => {
           </CardContent>
         </CardActionArea>
       </Card>
+      <ImageDialog
+        open={isDialogOpen}
+        onClose={closeDialogHandler}
+        image={props.image}
+        alt={props.alt}
+        title={props.city}
+      />
     </div>
   )
 }
