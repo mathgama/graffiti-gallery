@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 import { Container } from '@mui/material'
+import Header from '../components/layout/Header'
 
 export default function Home() {
   const mockData = [
@@ -36,15 +37,18 @@ export default function Home() {
   ]
 
   return (
-    <Container>
-      <FeaturedGraffiti
-        image="https://www.streetartbio.com/wp-content/uploads/2020/03/Banksy_Balloon_Girl_London.jpg"
-        alt="Featured"
-        city="New York"
-        uploadUser="mathgama"
-        uploadDate="Jun 10, 2019"
-      />
-      <GraffitiList items={mockData} />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <FeaturedGraffiti
+          image="https://www.streetartbio.com/wp-content/uploads/2020/03/Banksy_Balloon_Girl_London.jpg"
+          alt="Featured"
+          city="New York"
+          uploadUser="mathgama"
+          uploadDate="Jun 10, 2019"
+        />
+        <GraffitiList items={mockData} />
+      </Container>
+    </>
   )
 }
