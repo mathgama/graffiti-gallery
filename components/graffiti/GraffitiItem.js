@@ -11,7 +11,7 @@ import styles from './GraffitiItem.module.css'
 const GraffitiItem = (props) => {
   return (
     <Grid item xs={12} md={6}>
-      <Card sx={{ m: 1 }}>
+      <Card>
         <CardActionArea>
           <CardMedia
             component="img"

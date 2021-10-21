@@ -5,8 +5,10 @@ import styles from './GraffitiList.module.css'
 const GraffitiList = (props) => {
   return (
     <div>
-      <Typography variant="h4">Latest Submissions</Typography>
-      <Grid container>
+      <Typography variant="h4" sx={{ my: 2 }}>
+        Latest Submissions
+      </Typography>
+      <Grid container spacing={2}>
         {props.items.map((graffiti) => (
           <GraffitiItem
             key={graffiti.id}
