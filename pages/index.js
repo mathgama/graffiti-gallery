@@ -1,5 +1,3 @@
-import styles from '../styles/Home.module.css'
-
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 import { Container } from '@mui/material'
@@ -39,18 +37,14 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <Container>
-        <FeaturedGraffiti
-          image="/Banksy_Balloon_Girl_London.jpg"
-          alt="Featured"
-          city="New York"
-          uploadUser="mathgama"
-          uploadDate="Jun 10, 2019"
-        />
-        <GraffitiList items={mockData} />
-      </Container>
-      <Footer />
+      <FeaturedGraffiti
+        image="/Banksy_Balloon_Girl_London.jpg"
+        alt="Featured"
+        city="New York"
+        uploadUser="mathgama"
+        uploadDate="Jun 10, 2019"
+      />
+      <GraffitiList items={mockData} />
     </>
   )
 }
