@@ -7,7 +7,6 @@ import {
   useScrollTrigger,
 } from '@mui/material'
 import PaletteIcon from '@mui/icons-material/Palette'
-import styles from './Header.module.css'
 
 const HideOnScroll = (props) => {
   const trigger = useScrollTrigger()

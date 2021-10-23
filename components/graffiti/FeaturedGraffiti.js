@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@mui/material'
 import ImageDialog from '../util/ImageDialog'
-import styles from './FeaturedGraffiti.module.css'
 
 const FeaturedGraffiti = (props) => {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)

@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@mui/material'
 import ImageDialog from '../util/ImageDialog'
-import styles from './GraffitiItem.module.css'
 
 const GraffitiItem = (props) => {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)

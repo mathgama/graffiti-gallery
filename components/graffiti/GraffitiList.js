@@ -1,6 +1,5 @@
 import { Grid, Typography } from '@mui/material'
 import GraffitiItem from './GraffitiItem'
-import styles from './GraffitiList.module.css'
 
 const GraffitiList = (props) => {
   return (
