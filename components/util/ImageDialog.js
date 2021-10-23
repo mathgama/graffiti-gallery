@@ -10,6 +10,8 @@ import {
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
+import styles from './ImageDialog.module.css'
+import { Box } from '@mui/system'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -25,7 +27,7 @@ const ImageDialog = (props) => {
       scroll="body"
     >
       <DialogTitle>
-        <Grid container>
+        <Grid container alignItems="center">
           <Grid item>
             <IconButton onClick={props.onClose}>
               <CloseIcon />
@@ -40,7 +42,7 @@ const ImageDialog = (props) => {
         {
           //<Image src={props.image} alt={props.alt} />
         }
-        <img src={props.image} alt={props.alt} />
+        <img src={props.image} alt={props.alt} className={styles.fullImage} />
       </DialogContent>
     </Dialog>
   )
