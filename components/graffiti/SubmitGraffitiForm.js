@@ -1,16 +1,38 @@
 import React from 'react'
-import { Button, Card, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Button, Card, Grid, TextField, Typography } from '@mui/material'
+import { imageUpload } from '../util/Firebase'
 
 const SubmitGraffitiForm = (props) => {
   const cityInputRef = React.useRef()
+  const { alert, setAlert } = React.useState(false)
+  const { alertSeverity, setAlertSeverity } = React.useState()
+  const { alertContent, setAlertContent } = React.useState()
 
   const imageSelectHandler = (event) => {
-    const graffitiData = {
-      city: cityInputRef.current.value,
-      image: event.target.value,
-    }
+    const image = event.target.files[0]
 
-    props.onSubmit(graffitiData)
+    if (image) {
+      imageUpload(
+        image,
+        (error) => {
+          this.setAlert(true)
+          this.setAlertSeverity('error')
+          this.setAlertContent(error)
+        },
+        (url) => {
+          this.setAlert(true)
+          this.setAlertSeverity('success')
+          this.setAlertContent('Image uploaded successfully')
+
+          const graffitiData = {
+            city: cityInputRef.current.value,
+            image: url,
+          }
+
+          this.props.onSubmit(graffitiData)
+        }
+      )
+    }
   }
 
   return (
@@ -41,6 +63,7 @@ const SubmitGraffitiForm = (props) => {
           </label>
         </Grid>
       </Grid>
+      {alert && <Alert severity={alertSeverity}>{alertContent}</Alert>}
     </>
   )
 }
