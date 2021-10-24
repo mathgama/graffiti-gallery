@@ -1,8 +1,5 @@
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
-import { Container } from '@mui/material'
-import Header from '../components/layout/Header'
-import Footer from '../components/layout/Footer'
 
 export default function Home() {
   const mockData = [
@@ -38,7 +35,7 @@ export default function Home() {
   return (
     <>
       <FeaturedGraffiti
-        image="/Banksy_Balloon_Girl_London.jpg"
+        image="https://upload.wikimedia.org/wikipedia/commons/0/0c/Banksy_Girl_and_Heart_Balloon_%282840632113%29.jpg"
         alt="Featured"
         city="New York"
         uploadUser="mathgama"

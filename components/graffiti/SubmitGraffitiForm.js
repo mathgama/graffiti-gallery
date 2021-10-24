@@ -1,12 +1,22 @@
 import React from 'react'
-import { Alert, Button, Card, Grid, TextField, Typography } from '@mui/material'
+import {
+  Alert,
+  Button,
+  Grid,
+  LinearProgress,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { imageUpload } from '../util/Firebase'
 
 const SubmitGraffitiForm = (props) => {
   const cityInputRef = React.useRef()
-  const { alert, setAlert } = React.useState(false)
-  const { alertSeverity, setAlertSeverity } = React.useState()
-  const { alertContent, setAlertContent } = React.useState()
+  const [alert, setAlert] = React.useState({
+    open: false,
+    severity: null,
+    content: '',
+  })
+  const [progress, setProgress] = React.useState(0)
 
   const imageSelectHandler = (event) => {
     const image = event.target.files[0]
@@ -14,25 +24,44 @@ const SubmitGraffitiForm = (props) => {
     if (image) {
       imageUpload(
         image,
+        (progress) => {
+          setProgress(progress)
+        },
         (error) => {
-          this.setAlert(true)
-          this.setAlertSeverity('error')
-          this.setAlertContent(error)
+          setAlert({
+            open: true,
+            severity: 'error',
+            content: error,
+          })
+          setTimeout(closeAlert, 3000)
+          setProgress(0)
         },
         (url) => {
-          this.setAlert(true)
-          this.setAlertSeverity('success')
-          this.setAlertContent('Image uploaded successfully')
+          setAlert({
+            open: true,
+            severity: 'success',
+            content: 'Image uploaded successfully',
+          })
+          setTimeout(closeAlert, 3000)
+          setProgress(0)
 
           const graffitiData = {
             city: cityInputRef.current.value,
             image: url,
           }
 
-          this.props.onSubmit(graffitiData)
+          props.onSubmit(graffitiData)
         }
       )
     }
+  }
+
+  const closeAlert = () => {
+    setAlert({
+      open: false,
+      severity: '',
+      content: '',
+    })
   }
 
   return (
@@ -62,8 +91,17 @@ const SubmitGraffitiForm = (props) => {
             </Button>
           </label>
         </Grid>
+        {progress > 0 && (
+          <Grid item>
+            <LinearProgress variant="determinate" value={progress} />
+          </Grid>
+        )}
+        {alert.open && (
+          <Grid item>
+            <Alert severity={alert.severity}>{alert.content}</Alert>
+          </Grid>
+        )}
       </Grid>
-      {alert && <Alert severity={alertSeverity}>{alertContent}</Alert>}
     </>
   )
 }
