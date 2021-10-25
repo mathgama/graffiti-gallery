@@ -5,11 +5,13 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-
-import 'firebase/storage'
+import { getDatabase } from 'firebase/database'
+import { v4 as uuid } from 'uuid'
 
 const app = initializeApp(process.env.firebase)
+
 const storage = getStorage(app)
+const database = getDatabase(app)
 
 const imageUpload = (
   image,
@@ -17,7 +19,10 @@ const imageUpload = (
   errorCallback,
   successCallback
 ) => {
-  const storageRef = ref(storage, `images/${image.name}`)
+  const id = uuid()
+
+  //const storageRef = ref(storage, `images/${image.name}`)
+  const storageRef = ref(storage, `images/${id}`)
 
   const uploadTask = uploadBytesResumable(storageRef, image)
 
@@ -34,7 +39,7 @@ const imageUpload = (
     },
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-        successCallback(url)
+        successCallback(url, id)
       })
     }
   )

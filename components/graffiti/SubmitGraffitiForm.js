@@ -36,7 +36,7 @@ const SubmitGraffitiForm = (props) => {
           setTimeout(closeAlert, 3000)
           setProgress(0)
         },
-        (url) => {
+        (url, id) => {
           setAlert({
             open: true,
             severity: 'success',
@@ -46,6 +46,7 @@ const SubmitGraffitiForm = (props) => {
           setProgress(0)
 
           const graffitiData = {
+            id: id,
             city: cityInputRef.current.value,
             image: url,
           }
