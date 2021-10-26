@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { imageUpload } from '../util/Firebase'
+import { imageUpload, writeGraffitiData } from '../util/Firebase'
 
 const SubmitGraffitiForm = (props) => {
   const cityInputRef = React.useRef()
@@ -58,9 +58,11 @@ const SubmitGraffitiForm = (props) => {
 
           const graffitiData = {
             id: id,
+            url: url,
             city: cityInputRef.current.value,
-            image: url,
           }
+
+          writeGraffitiData(graffitiData)
 
           props.onSubmit(graffitiData)
         }

@@ -1,7 +1,11 @@
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 
+import { readGraffitiData } from '../components/util/Firebase'
+
 export default function Home() {
+  const testFirebase = readGraffitiData()
+
   const mockData = [
     {
       id: '1',
