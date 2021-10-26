@@ -21,6 +21,17 @@ const SubmitGraffitiForm = (props) => {
   const imageSelectHandler = (event) => {
     const image = event.target.files[0]
 
+    if (!cityInputRef.current.value) {
+      setAlert({
+        open: true,
+        severity: 'error',
+        content:
+          'Please fill in all the required fields before selecting the image',
+      })
+      setTimeout(closeAlert, 5000)
+      return
+    }
+
     if (image) {
       imageUpload(
         image,
