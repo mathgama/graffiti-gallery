@@ -1,40 +1,53 @@
+import { useState, useEffect, useCallback } from 'react'
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 
 import { readGraffitiData } from '../components/util/Firebase'
 
-export default function Home() {
-  const testFirebase = readGraffitiData()
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
 
-  const mockData = [
-    {
-      id: '1',
-      image:
-        'https://cdn.pixabay.com/photo/2016/02/19/11/31/graffiti-wall-1209761_1280.jpg',
-      alt: 'Description',
-      city: 'São Paulo',
-      uploadUser: 'mathgama',
-      uploadDate: 'Oct 18, 2021',
-    },
-    {
-      id: '2',
-      image:
-        'https://catracalivre.com.br/wp-content/thumbnails/0FVc35uC_PYQOVNmYpeMsNEDnsw=/wp-content/uploads/2019/01/andrea-miramontes-toronto-street-art-canada-blogueira.jpg',
-      alt: 'Description',
-      city: 'Belo Horizonte',
-      uploadUser: 'mathgama',
-      uploadDate: 'Oct 18, 2021',
-    },
-    {
-      id: '3',
-      image:
-        'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/ea/8a/51.jpg',
-      alt: 'Description',
-      city: 'Dubai',
-      uploadUser: 'mathgama',
-      uploadDate: 'Oct 18, 2021',
-    },
-  ]
+export default function Home() {
+  const [graffitiList, setGraffitiList] = useState([])
+
+  const fetchGraffiti = useCallback(async () => {
+    const docList = await readGraffitiData()
+
+    const formattedList = docList.map((doc) => {
+      const data = doc.data()
+      const uploadDate = new Date(data.date)
+      const formattedDate = `${
+        months[uploadDate.getMonth()]
+      } ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`
+
+      return {
+        id: doc.id,
+        image: data.url,
+        alt: '',
+        city: data.city,
+        uploadUser: data.user,
+        uploadDate: formattedDate,
+      }
+    })
+
+    setGraffitiList(formattedList)
+  }, [])
+
+  useEffect(() => {
+    fetchGraffiti()
+  }, [fetchGraffiti])
 
   return (
     <>
@@ -45,7 +58,7 @@ export default function Home() {
         uploadUser="mathgama"
         uploadDate="Jun 10, 2019"
       />
-      <GraffitiList items={mockData} />
+      <GraffitiList items={graffitiList} />
     </>
   )
 }

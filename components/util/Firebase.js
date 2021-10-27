@@ -61,17 +61,6 @@ const writeGraffitiData = async (graffitiData) => {
   } catch (e) {
     console.error('Error adding document: ', e)
   }
-
-  /*
-  const databaseRef = refDatabase(database, 'graffiti/' + graffitiData.id)
-
-  setDatabase(databaseRef, {
-    url: graffitiData.url,
-    city: graffitiData.city,
-    user: 'admin',
-    date: new Date().toJSON(),
-  })
-  */
 }
 
 const readGraffitiData = async () => {
@@ -79,9 +68,13 @@ const readGraffitiData = async () => {
 
   const querySnapshot = await getDocs(q)
 
+  const graffitiList = []
+
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, ' => ', doc.data())
+    graffitiList.push(doc)
   })
+
+  return graffitiList
 }
 
 export { imageUpload, writeGraffitiData, readGraffitiData }
