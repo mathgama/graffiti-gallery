@@ -23,7 +23,7 @@ const GraffitiItem = (props) => {
   return (
     <>
       <Grid item xs={12} md={6}>
-        <Card onClick={openDialogHandler}>
+        <Card onClick={openDialogHandler} ref={props.innerRef}>
           <CardActionArea>
             <CardMedia
               component="img"

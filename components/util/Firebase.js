@@ -12,6 +12,9 @@ import {
   getDocs,
   query,
   orderBy,
+  startAt,
+  startAfter,
+  limit,
 } from 'firebase/firestore'
 import { v4 as uuid } from 'uuid'
 
@@ -63,8 +66,22 @@ const writeGraffitiData = async (graffitiData) => {
   }
 }
 
-const readGraffitiData = async () => {
-  const q = query(collection(database, 'graffiti'), orderBy('date', 'desc'))
+const readGraffitiData = async (lastVisible) => {
+  let q
+
+  if (lastVisible)
+    q = query(
+      collection(database, 'graffiti'),
+      orderBy('date', 'desc'),
+      startAfter(lastVisible),
+      limit(2)
+    )
+  else
+    q = query(
+      collection(database, 'graffiti'),
+      orderBy('date', 'desc'),
+      limit(2)
+    )
 
   const querySnapshot = await getDocs(q)
 

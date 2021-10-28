@@ -1,8 +1,10 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
 
 import { readGraffitiData } from '../components/util/Firebase'
+import { Button, CircularProgress, LinearProgress, useScrollTrigger } from '@mui/material'
+import { Box } from '@mui/system'
 
 const months = [
   'Jan',
@@ -21,9 +23,31 @@ const months = [
 
 export default function Home() {
   const [graffitiList, setGraffitiList] = useState([])
+  const [lastGraffitiVisible, setLastGraffitiVisible] = useState()
+  const [hasMoreToFetch, setHasMoreToFetch] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  const fetchGraffiti = useCallback(async () => {
-    const docList = await readGraffitiData()
+  const observer = useRef()
+  const lastElementRef = useCallback(node => {
+    if (loading) return
+    if (observer.current) observer.current.disconnect()
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting)
+        fetchGraffiti()
+    })
+    if (node) observer.current.observe(node)
+  })
+
+  const fetchGraffiti = async () => {
+    if(!hasMoreToFetch)
+      return
+
+    setLoading(true)
+
+    const docList = await readGraffitiData(lastGraffitiVisible)
+
+    setLastGraffitiVisible(docList[docList.length - 1]) 
+    setHasMoreToFetch(docList.length > 0)
 
     const formattedList = docList.map((doc) => {
       const data = doc.data()
@@ -42,12 +66,16 @@ export default function Home() {
       }
     })
 
-    setGraffitiList(formattedList)
-  }, [])
+    setGraffitiList((current) => {
+      return current.concat(formattedList)
+    })
+
+    setLoading(false)
+  }
 
   useEffect(() => {
     fetchGraffiti()
-  }, [fetchGraffiti])
+  }, [])
 
   return (
     <>
@@ -58,7 +86,12 @@ export default function Home() {
         uploadUser="mathgama"
         uploadDate="Jun 10, 2019"
       />
-      <GraffitiList items={graffitiList} />
+      <GraffitiList items={graffitiList} lastElementRef={lastElementRef} />
+      { loading && (
+      <Box justifyContent="center" sx={{ display: 'flex' }}>
+         <CircularProgress sx={{ mt: 2 }} />
+      </Box>
+      )}
     </>
   )
 }
