@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
-import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import AuthContext from '../store/auth-context'
 
@@ -50,11 +49,7 @@ const UserMenu = (props) => {
         open={open}
         onClose={menuCloseHandler}
       >
-        <MenuItem
-        //onClick={authCtx.logout}
-        >
-          Logout
-        </MenuItem>
+        <MenuItem onClick={props.onLogout}>Logout</MenuItem>
       </Menu>
     </>
   )

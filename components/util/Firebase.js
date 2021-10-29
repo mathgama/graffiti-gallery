@@ -19,6 +19,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithRedirect,
+  signOut,
   onAuthStateChanged,
 } from 'firebase/auth'
 import { v4 as uuid } from 'uuid'
@@ -117,5 +118,6 @@ export {
   readGraffitiData,
   auth,
   googleSignIn,
+  signOut,
   onAuthStateChanged,
 }

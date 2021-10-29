@@ -1,7 +1,6 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {
   AppBar,
-  Avatar,
   Button,
   Slide,
   Toolbar,
@@ -10,7 +9,12 @@ import {
 } from '@mui/material'
 import PaletteIcon from '@mui/icons-material/Palette'
 import PersonIcon from '@mui/icons-material/Person'
-import { auth, googleSignIn, onAuthStateChanged } from '../util/Firebase'
+import {
+  auth,
+  googleSignIn,
+  signOut,
+  onAuthStateChanged,
+} from '../util/Firebase'
 import AuthContext from '../../store/auth-context'
 import UserMenu from '../UserMenu'
 
@@ -34,7 +38,12 @@ const Header = () => {
         currentUser.displayName,
         currentUser.photoURL
       )
+    else authCtx.logout()
   })
+
+  const logoutHandler = () => {
+    signOut(auth)
+  }
 
   return (
     <header>
@@ -46,7 +55,7 @@ const Header = () => {
               Graffiti Gallery
             </Typography>
             {authCtx.isLoggedIn ? (
-              <UserMenu />
+              <UserMenu onLogout={logoutHandler} />
             ) : (
               <Button
                 startIcon={<PersonIcon />}
