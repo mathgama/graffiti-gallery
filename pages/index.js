@@ -45,25 +45,10 @@ export default function Home() {
 
     const docList = await readGraffitiData(lastGraffitiVisible)
 
-    setLastGraffitiVisible(docList[docList.length - 1]) 
+    setLastGraffitiVisible(docList[docList.length - 1])
     setHasMoreToFetch(docList.length > 0)
 
-    const formattedList = docList.map((doc) => {
-      const data = doc.data()
-      const uploadDate = new Date(data.date)
-      const formattedDate = `${
-        months[uploadDate.getMonth()]
-      } ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`
-
-      return {
-        id: doc.id,
-        image: data.url,
-        alt: '',
-        city: data.city,
-        uploadUser: data.user,
-        uploadDate: formattedDate,
-      }
-    })
+    const formattedList = formatDocList(docList)
 
     setGraffitiList((current) => {
       return current.concat(formattedList)
@@ -71,6 +56,24 @@ export default function Home() {
 
     setLoading(false)
   }
+
+  const formatDocList = (docList) => 
+    docList.map((doc) => {
+      const {user, city, url, date} = doc.data()
+      const dateObj = new Date(date)
+      const formattedDate = `${
+        months[dateObj.getMonth()]
+      } ${dateObj.getDate()}, ${dateObj.getFullYear()}`
+
+      return {
+        id: doc.id,
+        image: url,
+        alt: '',
+        city: city,
+        uploadUser: user,
+        uploadDate: formattedDate,
+      }
+    })
 
   useEffect(() => {
     fetchGraffiti()
