@@ -18,7 +18,7 @@ const writeGraffitiData = async (graffitiData) => {
     await addDoc(collection(database, 'graffiti'), {
       url: graffitiData.url,
       city: graffitiData.city,
-      user: 'admin',
+      user: graffitiData.user,
       date: new Date().toJSON(),
     })
   } catch (e) {

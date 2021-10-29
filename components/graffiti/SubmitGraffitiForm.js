@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   Alert,
   Button,
@@ -9,6 +9,7 @@ import {
 } from '@mui/material'
 import { imageUpload } from '../util/firebase-storage'
 import { writeGraffitiData } from '../util/firebase-firestore'
+import AuthContext from '../../store/auth-context'
 
 const SubmitGraffitiForm = (props) => {
   const cityInputRef = React.useRef()
@@ -18,6 +19,7 @@ const SubmitGraffitiForm = (props) => {
     content: '',
   })
   const [progress, setProgress] = React.useState(0)
+  const authCtx = useContext(AuthContext)
 
   const imageSelectHandler = (event) => {
     const image = event.target.files[0]
@@ -61,6 +63,7 @@ const SubmitGraffitiForm = (props) => {
             id: id,
             url: url,
             city: cityInputRef.current.value,
+            user: authCtx.displayName,
           }
 
           writeGraffitiData(graffitiData)
