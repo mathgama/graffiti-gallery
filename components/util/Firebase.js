@@ -12,16 +12,21 @@ import {
   getDocs,
   query,
   orderBy,
-  startAt,
   startAfter,
   limit,
 } from 'firebase/firestore'
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  onAuthStateChanged,
+} from 'firebase/auth'
 import { v4 as uuid } from 'uuid'
 
 const app = initializeApp(process.env.firebase)
 
+// STORAGE
 const storage = getStorage(app)
-const database = getFirestore(app)
 
 const imageUpload = (
   image,
@@ -52,6 +57,9 @@ const imageUpload = (
     }
   )
 }
+
+// FIRESTORE
+const database = getFirestore(app)
 
 const writeGraffitiData = async (graffitiData) => {
   try {
@@ -94,4 +102,20 @@ const readGraffitiData = async (lastVisible) => {
   return graffitiList
 }
 
-export { imageUpload, writeGraffitiData, readGraffitiData }
+// AUTH
+const auth = getAuth()
+
+const googleSignIn = () => {
+  const provider = new GoogleAuthProvider()
+
+  signInWithRedirect(auth, provider)
+}
+
+export {
+  imageUpload,
+  writeGraffitiData,
+  readGraffitiData,
+  auth,
+  googleSignIn,
+  onAuthStateChanged,
+}

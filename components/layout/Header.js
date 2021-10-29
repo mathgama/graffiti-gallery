@@ -1,5 +1,7 @@
+import { useContext } from 'react'
 import {
   AppBar,
+  Avatar,
   Button,
   Slide,
   Toolbar,
@@ -7,6 +9,10 @@ import {
   useScrollTrigger,
 } from '@mui/material'
 import PaletteIcon from '@mui/icons-material/Palette'
+import PersonIcon from '@mui/icons-material/Person'
+import { auth, googleSignIn, onAuthStateChanged } from '../util/Firebase'
+import AuthContext from '../../store/auth-context'
+import UserMenu from '../UserMenu'
 
 const HideOnScroll = (props) => {
   const trigger = useScrollTrigger()
@@ -19,6 +25,17 @@ const HideOnScroll = (props) => {
 }
 
 const Header = () => {
+  const authCtx = useContext(AuthContext)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser)
+      authCtx.login(
+        currentUser.accessToken,
+        currentUser.displayName,
+        currentUser.photoURL
+      )
+  })
+
   return (
     <header>
       <HideOnScroll>
@@ -28,7 +45,18 @@ const Header = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Graffiti Gallery
             </Typography>
-            <Button color="inherit">Login</Button>
+            {authCtx.isLoggedIn ? (
+              <UserMenu />
+            ) : (
+              <Button
+                startIcon={<PersonIcon />}
+                color="inherit"
+                variant="outlined"
+                onClick={googleSignIn}
+              >
+                Login
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
