@@ -7,7 +7,7 @@ import {
   CardContent,
   Typography,
 } from '@mui/material'
-import ImageDialog from '../util/ImageDialog'
+import ImageDialog from '../ImageDialog'
 
 const GraffitiItem = (props) => {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)

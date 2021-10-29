@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import GraffitiList from '../components/graffiti/GraffitiList'
 import FeaturedGraffiti from '../components/graffiti/FeaturedGraffiti'
-
-import { readGraffitiData } from '../components/util/Firebase'
-import { Button, CircularProgress, LinearProgress, useScrollTrigger } from '@mui/material'
+import { readGraffitiData } from '../components/util/firebase-firestore'
+import { CircularProgress } from '@mui/material'
 import { Box } from '@mui/system'
 
 const months = [

@@ -7,7 +7,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { imageUpload, writeGraffitiData } from '../util/Firebase'
+import { imageUpload } from '../util/firebase-storage'
+import { writeGraffitiData } from '../util/firebase-firestore'
 
 const SubmitGraffitiForm = (props) => {
   const cityInputRef = React.useRef()

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import {
   AppBar,
   Button,
@@ -14,7 +14,7 @@ import {
   googleSignIn,
   signOut,
   onAuthStateChanged,
-} from '../util/Firebase'
+} from '../util/firebase-auth'
 import AuthContext from '../../store/auth-context'
 import UserMenu from '../UserMenu'
 
