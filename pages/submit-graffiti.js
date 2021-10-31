@@ -1,14 +1,12 @@
-import { useRouter, useContext } from 'react'
+import { useContext } from 'react'
 import SubmitGraffitiForm from '../components/graffiti/SubmitGraffitiForm'
-import AuthContext from '../store/AuthContext.js'
+import AuthContext from '../store/auth-context'
+import { googleSignIn } from '../components/util/firebase-auth'
 
 export default function SubmitGraffiti() {
-  const router = useRouter()
   const authCtx = useContext(AuthContext)
 
-  const submitHandler = (graffitiData) => {}
+  if (authCtx.doneFetching && !authCtx.isLoggedIn) googleSignIn()
 
-  if (!authCtx.isLoggedIn) router.replace('/')
-
-  return <SubmitGraffitiForm onSubmit={submitHandler} />
+  return <SubmitGraffitiForm />
 }

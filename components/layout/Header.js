@@ -39,6 +39,8 @@ const Header = () => {
         currentUser.photoURL
       )
     else authCtx.logout()
+
+    authCtx.finishFetch()
   })
 
   const logoutHandler = () => {

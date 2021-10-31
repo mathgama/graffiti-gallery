@@ -68,7 +68,7 @@ const SubmitGraffitiForm = (props) => {
 
           writeGraffitiData(graffitiData)
 
-          props.onSubmit(graffitiData)
+          //props.onSubmit(graffitiData)
         }
       )
     }
