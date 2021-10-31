@@ -8,6 +8,7 @@ import {
   orderBy,
   startAfter,
   limit,
+  where,
 } from 'firebase/firestore'
 
 const app = initializeApp(process.env.firebase)
@@ -54,4 +55,22 @@ const readGraffitiData = async (lastVisible) => {
   return graffitiList
 }
 
-export { writeGraffitiData, readGraffitiData }
+const readFeaturedGraffiti = async () => {
+
+  const q = query(
+      collection(database, 'graffiti'),
+      where('featured', '==', true)
+    )
+
+  const querySnapshot = await getDocs(q)
+
+  const featuredGraffiti = []
+
+  querySnapshot.forEach((doc) => {
+    featuredGraffiti = doc
+  })
+
+  return featuredGraffiti
+}
+
+export { writeGraffitiData, readGraffitiData, readFeaturedGraffiti }
