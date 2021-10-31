@@ -1,8 +1,10 @@
 import { useContext } from 'react'
+import Link from 'next/link'
 import {
   AppBar,
   Button,
   Slide,
+  Stack,
   Toolbar,
   Typography,
   useScrollTrigger,
@@ -17,6 +19,8 @@ import {
 } from '../util/firebase-auth'
 import AuthContext from '../../store/auth-context'
 import UserMenu from '../UserMenu'
+import { Box } from '@mui/system'
+import styles from './Header.module.css'
 
 const HideOnScroll = (props) => {
   const trigger = useScrollTrigger()
@@ -52,10 +56,18 @@ const Header = () => {
       <HideOnScroll>
         <AppBar>
           <Toolbar>
-            <PaletteIcon sx={{ mr: 1 }} />
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Graffiti Gallery
-            </Typography>
+            <Link href="/" passHref>
+              <Stack
+                direction="horizontal"
+                className={styles.logo}
+                sx={{ flexGrow: 1 }}
+              >
+                <PaletteIcon sx={{ mr: 1 }} />
+                <Typography variant="h6" component="div">
+                  Graffiti Gallery
+                </Typography>
+              </Stack>
+            </Link>
             {authCtx.isLoggedIn ? (
               <UserMenu onLogout={logoutHandler} />
             ) : (
