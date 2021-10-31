@@ -8,8 +8,7 @@ export default function SubmitGraffiti() {
 
   const submitHandler = (graffitiData) => {}
 
-  if(!authCtx.isLoggedIn)
-    router.replace('/')
+  if (!authCtx.isLoggedIn) router.replace('/')
 
   return <SubmitGraffitiForm onSubmit={submitHandler} />
 }

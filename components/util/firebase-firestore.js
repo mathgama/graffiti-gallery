@@ -21,6 +21,7 @@ const writeGraffitiData = async (graffitiData) => {
       city: graffitiData.city,
       user: graffitiData.user,
       date: new Date().toJSON(),
+      featured: false,
     })
   } catch (e) {
     console.error('Error adding document: ', e)
@@ -33,6 +34,7 @@ const readGraffitiData = async (lastVisible) => {
   if (lastVisible)
     q = query(
       collection(database, 'graffiti'),
+      where('featured', '==', false),
       orderBy('date', 'desc'),
       startAfter(lastVisible),
       limit(4)
@@ -40,6 +42,7 @@ const readGraffitiData = async (lastVisible) => {
   else
     q = query(
       collection(database, 'graffiti'),
+      where('featured', '==', false),
       orderBy('date', 'desc'),
       limit(4)
     )
@@ -56,15 +59,14 @@ const readGraffitiData = async (lastVisible) => {
 }
 
 const readFeaturedGraffiti = async () => {
-
   const q = query(
-      collection(database, 'graffiti'),
-      where('featured', '==', true)
-    )
+    collection(database, 'graffiti'),
+    where('featured', '==', true)
+  )
 
   const querySnapshot = await getDocs(q)
 
-  const featuredGraffiti = []
+  let featuredGraffiti = {}
 
   querySnapshot.forEach((doc) => {
     featuredGraffiti = doc

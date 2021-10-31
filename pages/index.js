@@ -97,6 +97,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchGraffitiList()
+    fetchFeaturedGraffiti()
   }, [])
 
   return (
