@@ -34,13 +34,13 @@ const readGraffitiData = async (lastVisible) => {
       collection(database, 'graffiti'),
       orderBy('date', 'desc'),
       startAfter(lastVisible),
-      limit(2)
+      limit(4)
     )
   else
     q = query(
       collection(database, 'graffiti'),
       orderBy('date', 'desc'),
-      limit(2)
+      limit(4)
     )
 
   const querySnapshot = await getDocs(q)
