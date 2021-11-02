@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import {
   AppBar,
   Button,
@@ -45,6 +46,7 @@ const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const authCtx = useContext(AuthContext)
+  const router = useRouter()
 
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser)
@@ -60,6 +62,11 @@ const Header = () => {
 
   const logoutHandler = () => {
     signOut(auth)
+  }
+
+  const drawerItemClickHandler = (route) => {
+    router.push(route)
+    setOpenDrawer(false)
   }
 
   const theme = useTheme()
@@ -131,7 +138,11 @@ const Header = () => {
         onClose={() => setOpenDrawer(false)}
       >
         <List>
-          <ListItem sx={{ width: '250px' }}>
+          <ListItem
+            button
+            sx={{ width: '250px' }}
+            onClick={() => drawerItemClickHandler('/submit-graffiti')}
+          >
             <ListItemIcon>
               <UploadIcon />
             </ListItemIcon>
