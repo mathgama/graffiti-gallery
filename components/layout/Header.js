@@ -73,7 +73,7 @@ const Header = () => {
       <HideOnScroll>
         <AppBar>
           <Toolbar>
-            {isMobile && (
+            {isMobile && authCtx.isLoggedIn && (
               <IconButton
                 size="large"
                 edge="start"
