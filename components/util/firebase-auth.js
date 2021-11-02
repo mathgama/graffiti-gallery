@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from './firebase-config'
 import {
   GoogleAuthProvider,
   getAuth,
@@ -7,7 +8,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth'
 
-const app = initializeApp(process.env.firebase)
+const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 
 const googleSignIn = () => {

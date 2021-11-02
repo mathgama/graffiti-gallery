@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from './firebase-config'
 import {
   getStorage,
   ref,
@@ -7,7 +8,7 @@ import {
 } from 'firebase/storage'
 import { v4 as uuid } from 'uuid'
 
-const app = initializeApp(process.env.firebase)
+const app = initializeApp(firebaseConfig)
 const storage = getStorage(app)
 
 const imageUpload = (

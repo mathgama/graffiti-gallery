@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from './firebase-config'
 import {
   getFirestore,
   collection,
@@ -11,7 +12,7 @@ import {
   where,
 } from 'firebase/firestore'
 
-const app = initializeApp(process.env.firebase)
+const app = initializeApp(firebaseConfig)
 const database = getFirestore(app)
 
 const writeGraffitiData = async (graffitiData) => {
