@@ -15,13 +15,13 @@ Material UI was used as the UI library.
 
 ### Installation
 
-To run the application, first clone the repository to your local machine, and then run the following command in the created folder:
+- To run the application, first clone the repository to your local machine, and then run the following command in the created folder:
 
 ```
 yarn install
 ```
 
-Then you'll need to create a [Firebase](https://firebase.google.com/) project and provide the application with the environment variables. Those variables should be in a file named "next.config.js" (given the example in the "next.config.js.example" file).
+- Then you'll need to create a [Firebase](https://firebase.google.com/) project and provide the application with the environment variables. Those variables should be in the file named ".env".
 
 The firebase project should contain the following modules activated:
 
@@ -29,10 +29,10 @@ The firebase project should contain the following modules activated:
 - Firestore Database
 - Storage
 
-And then the app can be started with the command:
+- And then the app can be started with the command:
 
 ```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
