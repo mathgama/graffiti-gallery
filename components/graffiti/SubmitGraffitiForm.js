@@ -3,6 +3,7 @@ import {
   Alert,
   Button,
   Grid,
+  Input,
   LinearProgress,
   TextField,
   Typography,
@@ -97,10 +98,11 @@ const SubmitGraffitiForm = (props) => {
           />
         </Grid>
         <Grid item>
-          <input
-            style={{ display: 'none' }}
+          <Input
             id="imageInput"
             type="file"
+            style={{ display: 'none' }}
+            inputProps={{ accept: 'image/*' }}
             onChange={imageSelectHandler}
           />
           <label htmlFor="imageInput">
