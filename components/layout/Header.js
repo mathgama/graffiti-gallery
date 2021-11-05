@@ -72,9 +72,6 @@ const Header = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
-  const logoFlexGrow = authCtx.isLoggedIn && !isMobile ? 0 : 1
-  const navLinksFlexGrow = logoFlexGrow == 0 ? 1 : 0
-
   return (
     <header>
       <HideOnScroll>
@@ -92,34 +89,28 @@ const Header = () => {
               </IconButton>
             )}
             <Link href="/" passHref>
-              <Stack
-                direction="row"
-                sx={{ cursor: 'pointer', flexGrow: logoFlexGrow }}
-              >
+              <Stack direction="row" sx={{ cursor: 'pointer' }}>
                 {!isMobile && <PaletteIcon sx={{ mr: 1 }} />}
                 <Typography variant="h6">Graffiti Gallery</Typography>
               </Stack>
             </Link>
-            {authCtx.isLoggedIn && (
-              <>
-                {!isMobile && (
-                  <Box
-                    sx={{
-                      ml: 2.5,
-                      pt: 0.5,
-                      cursor: 'pointer',
-                      flexGrow: navLinksFlexGrow,
-                    }}
-                  >
-                    <Link href="/submit-graffiti" passHref>
-                      <Typography variant="body1">Submit Graffiti</Typography>
-                    </Link>
-                  </Box>
-                )}
-                <UserMenu onLogout={logoutHandler} />
-              </>
+            {authCtx.isLoggedIn && !isMobile && (
+              <Box
+                sx={{
+                  ml: 2.5,
+                  pt: 0.5,
+                  cursor: 'pointer',
+                }}
+              >
+                <Link href="/submit-graffiti" passHref>
+                  <Typography variant="body1">Submit Graffiti</Typography>
+                </Link>
+              </Box>
             )}
-            {!authCtx.isLoggedIn && (
+            <Box flexGrow={1} />
+            {authCtx.isLoggedIn ? (
+              <UserMenu onLogout={logoutHandler} />
+            ) : (
               <Button
                 startIcon={<PersonIcon />}
                 color="inherit"
