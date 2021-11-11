@@ -43,12 +43,23 @@ const SubmitGraffitiForm = (props) => {
           setProgress(progress)
         },
         (error) => {
+          let message
+
+          switch (error.code) {
+            case 'storage/unauthorized':
+              message =
+                'Permission denied. Please note: only images with maximum file size of 5MB are allowed.'
+              break
+            default:
+              message = error.message
+          }
+
           setAlert({
             open: true,
             severity: 'error',
-            content: error,
+            content: message,
           })
-          setTimeout(closeAlert, 3000)
+          setTimeout(closeAlert, 10000)
           setProgress(0)
         },
         (url, id) => {
