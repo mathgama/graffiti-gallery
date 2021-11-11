@@ -2,6 +2,8 @@
 
 This is a image gallery app built during the #100daysofcode challenge.
 
+![preview](./assets/preview.gif)
+
 ## Architecture
 
 The app uses firebase to store the images and show them in the homepage. Authentication is also done using firebase.
@@ -23,13 +25,12 @@ yarn install
 
 - Then you'll need to create a [Firebase](https://firebase.google.com/) project and provide the application with the environment variables. Those variables should be in the file named ".env".
 
-The firebase project should contain the following modules activated:
+- The firebase project should contain the following modules activated:
+  - Authentication (Google provider enabled)
+  - Firestore Database
+  - Storage
 
-- Authentication (Google provider enabled)
-- Firestore Database
-- Storage
-
-- And then the app can be started with the command:
+- Then the app can be started with the command:
 
 ```
 yarn dev
