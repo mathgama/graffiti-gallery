@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
+import Box from '@mui/material/Box'
 import PersonIcon from '@mui/icons-material/Person'
 import AuthContext from '../store/auth-context'
 
@@ -30,10 +31,20 @@ const UserMenu = (props) => {
             </Avatar>
           )
         }
-        sx={{ maxWidth: '180px' }}
+        //sx={{ maxWidth: '120px' }}
         onClick={menuOpenHandler}
       >
-        {authCtx.displayName}
+        <Box
+          component="span"
+          sx={{
+            width: '120px',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {authCtx.displayName}
+        </Box>
       </Button>
       <Menu
         disableScrollLock
