@@ -91,7 +91,9 @@ const Header = () => {
             <Link href="/" passHref>
               <Stack direction="row" sx={{ cursor: 'pointer' }}>
                 {!isMobile && <PaletteIcon sx={{ mr: 1 }} />}
-                <Typography variant="h6">Graffiti Gallery</Typography>
+                <Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>
+                  Graffiti Gallery
+                </Typography>
               </Stack>
             </Link>
             {authCtx.isLoggedIn && !isMobile && (
@@ -107,7 +109,7 @@ const Header = () => {
                 </Link>
               </Box>
             )}
-            <Box flexGrow={1} />
+            <Box flexGrow={1} minWidth="15px" />
             {authCtx.isLoggedIn ? (
               <UserMenu onLogout={logoutHandler} />
             ) : (
