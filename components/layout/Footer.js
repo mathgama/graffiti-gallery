@@ -32,7 +32,7 @@ const Footer = () => {
             </Grid>
             <Grid item xs={3} md={1}>
               <a
-                href="http://www.linkedin.com/in/matheus-gama-62ba3a115"
+                href="https://www.linkedin.com/in/matheus-gama-62ba3a115"
                 className={styles.socialIcon}
                 target="_blank"
                 rel="noreferrer"
