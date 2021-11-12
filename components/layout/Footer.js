@@ -24,14 +24,18 @@ const Footer = () => {
               <a
                 href="https://www.instagram.com/mathgama_/"
                 className={styles.socialIcon}
+                target="_blank"
+                rel="noreferrer"
               >
                 <InstagramIcon fontSize="inherit" />
               </a>
             </Grid>
             <Grid item xs={3} md={1}>
               <a
-                href="www.linkedin.com/in/matheus-gama-62ba3a115"
+                href="http://www.linkedin.com/in/matheus-gama-62ba3a115"
                 className={styles.socialIcon}
+                target="_blank"
+                rel="noreferrer"
               >
                 <LinkedInIcon fontSize="inherit" />
               </a>
@@ -40,6 +44,8 @@ const Footer = () => {
               <a
                 href="https://github.com/mathgama"
                 className={styles.socialIcon}
+                target="_blank"
+                rel="noreferrer"
               >
                 <GitHubIcon fontSize="inherit" />
               </a>
