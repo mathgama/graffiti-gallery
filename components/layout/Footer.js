@@ -21,17 +21,26 @@ const Footer = () => {
           </Box>
           <Grid container align="center" justifyContent="center">
             <Grid item xs={3} md={1}>
-              <a href="#" className={styles.socialIcon}>
+              <a
+                href="https://www.instagram.com/mathgama_/"
+                className={styles.socialIcon}
+              >
                 <InstagramIcon fontSize="inherit" />
               </a>
             </Grid>
             <Grid item xs={3} md={1}>
-              <a href="#" className={styles.socialIcon}>
+              <a
+                href="www.linkedin.com/in/matheus-gama-62ba3a115"
+                className={styles.socialIcon}
+              >
                 <LinkedInIcon fontSize="inherit" />
               </a>
             </Grid>
             <Grid item xs={3} md={1}>
-              <a href="#" className={styles.socialIcon}>
+              <a
+                href="https://github.com/mathgama"
+                className={styles.socialIcon}
+              >
                 <GitHubIcon fontSize="inherit" />
               </a>
             </Grid>
